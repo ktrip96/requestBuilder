@@ -16,11 +16,11 @@ const Select = ({ element }: Props) => {
 	const debouncedName = useDebounce<string>(name, 500)
 
 	useEffect(() => {
-		// Check if the Name is Empty
+		// Empty Name Case
 		if (debouncedName.trim().length === 0) {
 			setErrorMessage('This field should not be empty')
 		} else {
-			// Check if there is already a same name in builderState
+			// Name already-exists Case
 			let doesExist = false
 			for (let i = 0; i < builderState.length; i++) {
 				const stateElement = builderState[i]
@@ -38,7 +38,8 @@ const Select = ({ element }: Props) => {
 				setErrorMessage('Name fields should be unique')
 			} else {
 				setErrorMessage('')
-				// Update the builder state
+				// Name is Valid
+				// Update the BuilderState
 				setBuilderState((prev) => {
 					const updatedBuilder = prev.map((item) => {
 						if (item.id === element.id) {
@@ -66,7 +67,7 @@ const Select = ({ element }: Props) => {
 		const childrenToBeDeleted = returnElementChildren(element.id)
 		if (childrenToBeDeleted.length > 0)
 			setBuilderState((prev) => {
-				//	return all of the elements, that do not exist in childrenToBeDeleted array
+				//	return all of the elements that do not exist in childrenToBeDeleted array
 				const updatedBuilder = prev.filter((item) => {
 					for (let i = 0; i < childrenToBeDeleted.length; i++) {
 						if (item.id === childrenToBeDeleted[i].id) return false
@@ -133,15 +134,13 @@ const Select = ({ element }: Props) => {
 			<h1>
 				Father: <span className='font-semibold'> {element.fatherId}</span>
 			</h1>
-			{/* <h1>Level: {element.level}</h1>
-			<h1>Name: {element.name}</h1> */}
+
 			<h1>
 				Id : <span className='font-semibold'> {element.id}</span>
 			</h1>
 			<h1>
 				Name : <span className='font-semibold'> {element.name}</span>
 			</h1>
-
 			{/* TODO: Check if its viable to replace element.fatherId with element.id */}
 			{type === 'json' && <FormContainer fatherId={element.id} level={element.level + 1} />}
 		</div>

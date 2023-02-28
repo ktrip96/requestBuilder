@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { FormContainerType, useFormContext } from '../context/formContext'
 import Select from './Select'
 
@@ -9,8 +9,6 @@ type Props = {
 
 const FormContainer = ({ fatherId, level }: Props) => {
 	const { builderState, setBuilderState } = useFormContext()
-
-	console.log('Level: ', level, ' ', { builderState })
 
 	const handleAddNewElement = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
@@ -28,7 +26,7 @@ const FormContainer = ({ fatherId, level }: Props) => {
 
 	return (
 		<div
-			className={`border border-red-200 rounded-md m-4 p-4 ${
+			className={`border border-zinc-300 shadow-lg rounded-md m-4 p-4 ${
 				level !== 0 && 'ml-20'
 			}  flex flex-col justify-center`}
 		>
@@ -46,7 +44,7 @@ const FormContainer = ({ fatherId, level }: Props) => {
 				onClick={handleAddNewElement}
 				className='w-[200px] m-auto border p-2 my-4 text-white text-center bg-gray-700 rounded-md hover:bg-gray-500 hover:shadow-lg'
 			>
-				+
+				Add field
 			</button>
 		</div>
 	)
